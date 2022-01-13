@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VeterinaryAPI.Database;
 
 namespace VeterinaryAPI
 {
@@ -32,6 +33,8 @@ namespace VeterinaryAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VeterinaryAPI", Version = "v1" });
             });
+
+            services.AddDbContext<VeterinaryAPIDbcontext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
