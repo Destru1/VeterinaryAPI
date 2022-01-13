@@ -5,11 +5,19 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.Database.Models.Veterinary;
 
 namespace VeterinaryAPI.Database
 {
     public class VeterinaryAPIDbcontext : DbContext
     {
+
+
+        public DbSet<Veterinarian> Veterinarians { get; set; }
+
+        public DbSet<Pet> Pets { get; set; }
+
+        public DbSet<VeterinarianPetMapping> VeterinariansPetsMapping { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
