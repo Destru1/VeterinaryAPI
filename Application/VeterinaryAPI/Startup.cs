@@ -10,8 +10,11 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using VeterinaryAPI.Database;
+using VeterinaryAPI.Services.Database;
+using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI
 {
@@ -35,6 +38,10 @@ namespace VeterinaryAPI
             });
 
             services.AddDbContext<VeterinaryAPIDbcontext>();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<IVeterinarianService, VeterinarianService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Interfaces\" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\VeterinaryAPI.Database\VeterinaryAPI.Database.csproj" />
+    <ProjectReference Include="..\VeterinaryAPI.DTOs\VeterinaryAPI.DTOs.csproj" />
   </ItemGroup>
 
 </Project>
