@@ -41,8 +41,10 @@ namespace VeterinaryAPI
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<IVeterinarianService, VeterinarianService>();
+            RegisterDatabaseServices(services);
         }
+
+      
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,5 +67,13 @@ namespace VeterinaryAPI
                 endpoints.MapControllers();
             });
         }
+
+        private static void RegisterDatabaseServices(IServiceCollection services)
+        {
+            services.AddScoped<IVeterinarianService, VeterinarianService>();
+            services.AddScoped<IOwnerService, OwnerService>();
+        }
     }
 }
+
+
