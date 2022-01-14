@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinaryAPI.Database;
 
 namespace VeterinaryAPI.Database.Migrations
 {
     [DbContext(typeof(VeterinaryAPIDbcontext))]
-    partial class VeterinaryAPIDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20220114100823_Change_Owner_Table")]
+    partial class Change_Owner_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,9 +52,6 @@ namespace VeterinaryAPI.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("Age")
-                        .HasColumnType("float");
 
                     b.Property<string>("Breed")
                         .HasColumnType("nvarchar(max)");
@@ -113,9 +112,6 @@ namespace VeterinaryAPI.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");

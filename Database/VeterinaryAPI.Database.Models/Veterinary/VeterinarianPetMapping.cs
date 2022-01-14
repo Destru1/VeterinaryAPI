@@ -22,5 +22,8 @@ namespace VeterinaryAPI.Database.Models.Veterinary
         public virtual Pet Pet { get; set; }
 
 
+        public DateTime AppointmentDate { get; set; }
+
+
     }
 }

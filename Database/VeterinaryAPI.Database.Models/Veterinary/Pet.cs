@@ -21,6 +21,13 @@ namespace VeterinaryAPI.Database.Models.Veterinary
 
         public string Breed { get; set; }
 
+        public double Age { get; set; }
+
+       
+
+
+        public Guid OwnerId { get; set; }
+        public virtual Owner Owner { get; set; }
         public virtual ICollection<VeterinarianPetMapping> Veterinarians { get; set; }
     }
 }

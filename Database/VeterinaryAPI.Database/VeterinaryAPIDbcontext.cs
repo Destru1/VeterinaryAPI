@@ -17,6 +17,10 @@ namespace VeterinaryAPI.Database
 
         public DbSet<Pet> Pets { get; set; }
 
+        public DbSet<Owner> Owners { get; set; }
+
+  
+
         public DbSet<VeterinarianPetMapping> VeterinariansPetsMapping { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

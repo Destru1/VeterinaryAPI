@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinaryAPI.Database;
 
 namespace VeterinaryAPI.Database.Migrations
 {
     [DbContext(typeof(VeterinaryAPIDbcontext))]
-    partial class VeterinaryAPIDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20220114095805_Add_Owner_Table")]
+    partial class Add_Owner_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,9 +53,6 @@ namespace VeterinaryAPI.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Age")
-                        .HasColumnType("float");
-
                     b.Property<string>("Breed")
                         .HasColumnType("nvarchar(max)");
 
@@ -63,7 +62,7 @@ namespace VeterinaryAPI.Database.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OwnerId")
+                    b.Property<Guid?>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Type")
@@ -77,6 +76,33 @@ namespace VeterinaryAPI.Database.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Pets");
+                });
+
+            modelBuilder.Entity("VeterinaryAPI.Database.Models.Veterinary.PetOwnerMapping", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("PetOwnerMapping");
                 });
 
             modelBuilder.Entity("VeterinaryAPI.Database.Models.Veterinary.Veterinarian", b =>
@@ -114,9 +140,6 @@ namespace VeterinaryAPI.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -142,12 +165,29 @@ namespace VeterinaryAPI.Database.Migrations
             modelBuilder.Entity("VeterinaryAPI.Database.Models.Veterinary.Pet", b =>
                 {
                     b.HasOne("VeterinaryAPI.Database.Models.Veterinary.Owner", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("VeterinaryAPI.Database.Models.Veterinary.PetOwnerMapping", b =>
+                {
+                    b.HasOne("VeterinaryAPI.Database.Models.Veterinary.Owner", "Owner")
                         .WithMany("Pets")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VeterinaryAPI.Database.Models.Veterinary.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Owner");
+
+                    b.Navigation("Pet");
                 });
 
             modelBuilder.Entity("VeterinaryAPI.Database.Models.Veterinary.VeterinarianPetMapping", b =>

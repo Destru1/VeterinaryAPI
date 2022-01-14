@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinaryAPI.Database;
 
 namespace VeterinaryAPI.Database.Migrations
 {
     [DbContext(typeof(VeterinaryAPIDbcontext))]
-    partial class VeterinaryAPIDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20220114113021_Add_AppointmentDate_To_VetPetMappingTable")]
+    partial class Add_AppointmentDate_To_VetPetMappingTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
