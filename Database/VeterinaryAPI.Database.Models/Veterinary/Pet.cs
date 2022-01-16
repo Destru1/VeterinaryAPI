@@ -13,6 +13,8 @@ namespace VeterinaryAPI.Database.Models.Veterinary
             :base()
         {
             this.Veterinarians = new HashSet<VeterinarianPetMapping>();
+            this.Owners = new HashSet<OwnerPetMapping>();
+
         }
 
         public string Name { get; set; }
@@ -24,10 +26,7 @@ namespace VeterinaryAPI.Database.Models.Veterinary
         public double Age { get; set; }
 
        
-
-
-        public Guid OwnerId { get; set; }
-        public virtual Owner Owner { get; set; }
         public virtual ICollection<VeterinarianPetMapping> Veterinarians { get; set; }
+        public virtual ICollection<OwnerPetMapping> Owners { get; set; }
     }
 }

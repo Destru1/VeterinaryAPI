@@ -12,7 +12,7 @@ namespace VeterinaryAPI.Database.Models.Veterinary
         public Owner()
             :base()
         {
-            this.Pets = new HashSet<Pet>();
+            this.Pets = new HashSet<OwnerPetMapping>();
         }
 
         public string FirstName { get; set; }
@@ -21,6 +21,6 @@ namespace VeterinaryAPI.Database.Models.Veterinary
 
         public string PhoneNumber { get; set; }
 
-        public virtual ICollection<Pet> Pets { get; set; }
+        public virtual ICollection<OwnerPetMapping> Pets { get; set; }
     }
 }
