@@ -26,6 +26,7 @@ namespace VeterinaryAPI.Services.Database
             List<Pet> pets = await this.DbSet
                 .OrderBy(p => p.Type)
                 .ThenBy(p => p.Breed)
+                .ThenBy(p => p.Name)
                 .ToListAsync();
 
             T mappedPets = this.Mapper.Map<T>(pets);

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Pet;
 using VeterinaryAPI.Services.Database.Interfaces;
@@ -57,7 +58,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromUpdate == false)
             {
-                return this.BadRequest("Something went wrong");
+                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
             return this.Ok();
         }
@@ -71,7 +72,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromDelete == false)
             {
-                return this.BadRequest("Something went wrong");
+                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
 
             return this.Ok();
