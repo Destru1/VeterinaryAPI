@@ -8,6 +8,6 @@ namespace VeterinaryAPI.DTOs.Pet
 {
      public class GetAllPetsDTO
     {
-        public ICollection<GetPetDTO> Pets { get; set; }
+        public IEnumerable<GetPetDTO> Pets { get; set; }
     }
 }

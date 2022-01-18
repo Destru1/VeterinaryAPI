@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.DTOs.Pet;
 
 namespace VeterinaryAPI.DTOs.Owner
 {
@@ -18,5 +19,7 @@ namespace VeterinaryAPI.DTOs.Owner
         public DateTime CreatedOn { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
+
+       public GetAllPetsDTO Pets { get; set; }
     }
 }
