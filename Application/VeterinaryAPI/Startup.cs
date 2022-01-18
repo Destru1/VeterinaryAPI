@@ -74,6 +74,7 @@ namespace VeterinaryAPI
             services.AddScoped<IOwnerService, OwnerService>();
             services.AddScoped<IPetService, PetService>();
             services.AddScoped<IOwnerPetMappingService, OwnerPetMappingService>();
+            services.AddScoped<IVeterinarianPetMappingService, VeterinarianPetMappingService>();
         }
     }
 }
