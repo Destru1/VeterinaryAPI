@@ -14,6 +14,7 @@ namespace VeterinaryAPI.Database.Models.Veterinary
             :base()
         {
             this.Pets = new HashSet<VeterinarianPetMapping>();
+            this.Positions = new HashSet<VeterinarianPositionMapping>();
         }
 
         [Required]
@@ -33,5 +34,6 @@ namespace VeterinaryAPI.Database.Models.Veterinary
         public string Email { get; set; }
 
         public virtual ICollection<VeterinarianPetMapping> Pets { get; set; }
+        public virtual ICollection<VeterinarianPositionMapping> Positions { get; set; }
     }
 }
