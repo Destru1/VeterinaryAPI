@@ -17,6 +17,7 @@ namespace VeterinaryAPI.Services.Database.Interfaces
         Task<T> AddAsync<T>(PostPetDTO pet);
 
         Task<bool> UpdateAsync(Guid id, PutPetDTO pet);
+        Task<bool> PartialUpdateAsync(Guid id, PatchPetDTO pet);
         Task<bool> DeleteAsync(Guid id);
     }
 }

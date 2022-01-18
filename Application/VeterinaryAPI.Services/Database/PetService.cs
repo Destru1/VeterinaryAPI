@@ -2,9 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Pet;
@@ -74,6 +77,40 @@ namespace VeterinaryAPI.Services.Database
             return true;
         }
 
+        public async Task<bool> PartialUpdateAsync(Guid id, PatchPetDTO pet)
+        {
+            Pet petToUpdate = await this.GetByIdAsync<Pet>(id);
+
+            if (petToUpdate == null)
+            {
+                throw new Exception(ExeptionMessages.PET_DOES_NOT_EXIST_MESSAGE);
+            }
+
+            Type modelType = pet.GetType();
+            PropertyInfo[] properties = modelType.GetProperties();
+
+            foreach (PropertyInfo propertyInfo in properties)
+            {
+                var propertyValue = propertyInfo.GetValue(pet);
+
+                if (propertyValue != null)
+                {
+                    Type propertyType = propertyInfo.PropertyType;
+
+                    Type petToUpdateType = petToUpdate.GetType();
+                    PropertyInfo propertyToUpdate = petToUpdateType.GetProperty(propertyInfo.Name);
+                    propertyToUpdate.SetValue(petToUpdate, propertyValue);
+                }
+            }
+            petToUpdate.UpdatedOn = DateTime.UtcNow;
+
+            this.Dbcontext.Update(petToUpdate);
+            await this.Dbcontext.SaveChangesAsync();
+
+            return true;
+
+        }
+
         public async Task<bool> DeleteAsync(Guid id)
         {
             Pet petToDelete = await this.GetByIdAsync<Pet>(id);
@@ -90,5 +127,6 @@ namespace VeterinaryAPI.Services.Database
             return true;
         }
 
+        
     }
 }

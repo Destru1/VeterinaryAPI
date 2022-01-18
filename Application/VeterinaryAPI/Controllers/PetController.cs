@@ -63,6 +63,19 @@ namespace VeterinaryAPI.Controllers
             return this.Ok();
         }
 
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> Patch(Guid id, PatchPetDTO model)
+        {
+            bool resultFromUpdate = await this.petService.PartialUpdateAsync(id, model);
+            if (resultFromUpdate == false)
+            {
+                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+            }
+            return this.Ok(resultFromUpdate);
+        }
+
+
         [HttpDelete]
         [Route("{id}")]
 
