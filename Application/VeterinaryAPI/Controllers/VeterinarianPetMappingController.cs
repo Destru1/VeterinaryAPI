@@ -11,7 +11,7 @@ using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/get-appointment")]
+    [Microsoft.AspNetCore.Mvc.Route("api/book-appointment")]
     public class VeterinarianPetMappingController : BaseAPIController
     {
         private readonly IVeterinarianService veterinarianService;
