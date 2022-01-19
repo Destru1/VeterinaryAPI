@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
+using VeterinaryAPI.Common.Exeptions;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Veterinarian;
@@ -75,7 +76,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (veterinarianToUpdate == null)
             {
-                throw new Exception("Vet does not exist");
+                throw new EntityDoesNotExistException(ExceptionMessages.VETERINARIAN_DOES_NOT_EXIST_MESSAGE);
             }
 
             Veterinarian updatedVeterinarian = this.Mapper.Map(veterinarian, veterinarianToUpdate);
@@ -93,7 +94,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (veterinarianToUpdate == null)
             {
-                throw new Exception(ExeptionMessages.VETERINARIAN_DOES_NOT_EXIST_MESSAGE);
+                throw new EntityDoesNotExistException(ExceptionMessages.VETERINARIAN_DOES_NOT_EXIST_MESSAGE);
             }
 
             Type modelType = model.GetType();
@@ -131,7 +132,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (veterinarianToDelete == null)
             {
-                return false;
+                throw new EntityDoesNotExistException(ExceptionMessages.VETERINARIAN_DOES_NOT_EXIST_MESSAGE);
             }
 
             this.DbSet.Remove(veterinarianToDelete);
@@ -150,7 +151,8 @@ namespace VeterinaryAPI.Services.Database
                 Position position = await positionService.GetByIdAsync<Position>(positionId);
                 if (position == null)
                 {
-                    //Todo position with tihs id dosent exist
+                    this.AddModelError("PositionsId", string.Format(ExceptionMessages.POSITION_DOES_NOT_EXIST_MESSAGE, positionId));
+               
                     continue;
                 }
                 bool isPositionAlreadyAssigned = veterinarian.Positions
@@ -158,7 +160,8 @@ namespace VeterinaryAPI.Services.Database
 
                 if (isPositionAlreadyAssigned)
                 {
-                    //Todo position already added message
+                    this.AddModelError("PositionsId", string.Format(ExceptionMessages.POSITION_ALREADY_ADDED_MESSAGE, positionId));
+                    
                     continue;
                 }
 

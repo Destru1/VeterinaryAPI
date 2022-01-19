@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using VeterinaryAPI.Database;
+using VeterinaryAPI.Infastructure.Middleware;
 using VeterinaryAPI.Services.Database;
 using VeterinaryAPI.Services.Database.Interfaces;
 
@@ -42,6 +44,8 @@ namespace VeterinaryAPI
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             RegisterDatabaseServices(services);
+
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
 
       
@@ -57,6 +61,8 @@ namespace VeterinaryAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseRouting();
 

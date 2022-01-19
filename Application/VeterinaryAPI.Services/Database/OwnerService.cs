@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common.Constants;
+using VeterinaryAPI.Common.Exeptions;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Owner;
@@ -19,9 +22,10 @@ namespace VeterinaryAPI.Services.Database
         private readonly IOwnerPetMappingService ownerPetMappingService;
         public OwnerService(VeterinaryAPIDbcontext dbcontext, 
             IMapper mapper,
+            IActionContextAccessor actionContextAccessor,
             IPetService petService,
             IOwnerPetMappingService ownerPetMappingService)
-            : base(dbcontext,mapper)
+            : base(dbcontext,mapper,actionContextAccessor)
         {
             this.petService = petService;
             this.ownerPetMappingService = ownerPetMappingService;
@@ -71,7 +75,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (ownerToUpdate == null)
             {
-                throw new Exception("Owner dosent exist.");
+                throw new EntityDoesNotExistException(ExceptionMessages.OWNER_DOES_NOT_EXIST_MESSAGE);
             }
 
             Owner updatedOwner = this.Mapper.Map(owner, ownerToUpdate);
@@ -89,7 +93,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (ownerToUpdate == null)
             {
-                //TODO exeption message
+                throw new EntityDoesNotExistException(ExceptionMessages.OWNER_DOES_NOT_EXIST_MESSAGE);
             }
             Type modelType = model.GetType();
             PropertyInfo[] properties = modelType.GetProperties();
@@ -129,7 +133,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (ownerToDelete == null)
             {
-                return false;
+                throw new EntityDoesNotExistException(ExceptionMessages.OWNER_DOES_NOT_EXIST_MESSAGE);
             }
 
             this.DbSet.Remove(ownerToDelete);
@@ -147,7 +151,7 @@ namespace VeterinaryAPI.Services.Database
                 Pet pet = await petService.GetByIdAsync<Pet>(petId);
                 if (pet == null)
                 {
-                    //TODO add error model pet does not exist
+                    this.AddModelError("PetId", string.Format(ExceptionMessages.PET_DOES_NOT_EXIST_MESSAGE, petId));
                     continue;
                 }
 
@@ -156,7 +160,7 @@ namespace VeterinaryAPI.Services.Database
 
                     if (isPetAlreadyWithOwner)
                 {
-                    //TODO add error model pet is with owner message
+                    this.AddModelError("PetId", string.Format(ExceptionMessages.PET_ALREADY_ADDED_MESSAGE, petId));
                     continue;
                 }
                 OwnerPetMapping ownerPetMapping = new OwnerPetMapping
