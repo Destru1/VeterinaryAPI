@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common.Constants;
+using VeterinaryAPI.Common.Exeptions;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.Services.Database.Interfaces;
@@ -30,7 +32,8 @@ namespace VeterinaryAPI.Services.Database
 
             if (veterinarianPositionRelation == null)
             {
-                //Todo exeption message no relation bween vet and position
+                throw new EntityDoesNotExistException(ExceptionMessages.VETERINARIAN_POSITION_MAPPING_DOES_NOT_EXIST_MESSAGE);
+             
             }
 
             var veterinarianRelationToReturn = this.Mapper.Map<T>(veterinarianPositionRelation);

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common.Constants;
+using VeterinaryAPI.Common.Exeptions;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Positions;
@@ -60,7 +62,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (positionToUpdate == null)
             {
-                throw new Exception("Position does not exist");
+                throw new EntityDoesNotExistException(ExceptionMessages.POSITION_DOES_NOT_EXIST_MESSAGE);
             }
 
             Position updatedPosition = this.Mapper.Map(model, positionToUpdate);
@@ -78,7 +80,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (positionToDelete == null)
             {
-                return false;
+                throw new EntityDoesNotExistException(ExceptionMessages.POSITION_DOES_NOT_EXIST_MESSAGE);
             }
 
             this.DbSet.Remove(positionToDelete);

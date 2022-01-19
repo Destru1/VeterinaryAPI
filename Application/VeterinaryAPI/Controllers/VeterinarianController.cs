@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
+using VeterinaryAPI.Common.Exeptions;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Veterinarian;
 using VeterinaryAPI.Services.Database.Interfaces;
@@ -59,7 +61,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromUpdate == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
             return this.Ok();
         }
@@ -71,11 +73,12 @@ namespace VeterinaryAPI.Controllers
             bool resultFormPartialUpdate = await this.veterinarianService.PartialUpdateAsync(id, model);
             if (this.ModelState.IsValid == false)
             {
-                //Todo throw model error;
+                IEnumerable<ModelError> errors = this.ModelState.Values.SelectMany(v => v.Errors);
+                throw new ModelException(errors);
             }
             if (resultFormPartialUpdate == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
 
             return this.Ok();
@@ -89,7 +92,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromDelete == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
 
             return this.Ok(resultFromDelete);
@@ -102,7 +105,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromDelete == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
 
             return this.Ok(resultFromDelete);

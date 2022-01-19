@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
+using VeterinaryAPI.Common.Exeptions;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Pet;
@@ -65,7 +66,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (petToUpdate == null)
             {
-                throw new Exception("Pet does not exist");
+                throw new EntityDoesNotExistException(ExceptionMessages.PET_DOES_NOT_EXIST_MESSAGE);
             }
 
             Pet updatedPet = this.Mapper.Map(pet, petToUpdate);
@@ -83,7 +84,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (petToUpdate == null)
             {
-                throw new Exception(ExeptionMessages.PET_DOES_NOT_EXIST_MESSAGE);
+                throw new EntityDoesNotExistException(ExceptionMessages.PET_DOES_NOT_EXIST_MESSAGE);
             }
 
             Type modelType = pet.GetType();
@@ -117,7 +118,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (petToDelete == null)
             {
-                return false;
+                throw new EntityDoesNotExistException(ExceptionMessages.PET_DOES_NOT_EXIST_MESSAGE);
             }
 
             this.DbSet.Remove(petToDelete);

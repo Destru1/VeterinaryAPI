@@ -58,7 +58,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromUpdate == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
             return this.Ok();
         }
@@ -70,7 +70,7 @@ namespace VeterinaryAPI.Controllers
             bool resultFromUpdate = await this.petService.PartialUpdateAsync(id, model);
             if (resultFromUpdate == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
             return this.Ok(resultFromUpdate);
         }
@@ -85,7 +85,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromDelete == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
 
             return this.Ok();

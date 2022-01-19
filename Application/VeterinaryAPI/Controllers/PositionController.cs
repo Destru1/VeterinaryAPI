@@ -55,7 +55,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromUpdate == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
 
             return this.Ok();
@@ -69,7 +69,7 @@ namespace VeterinaryAPI.Controllers
 
             if (resultFromDelete == false)
             {
-                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+                return this.BadRequest(ExceptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
             }
             return this.Ok();
         }
