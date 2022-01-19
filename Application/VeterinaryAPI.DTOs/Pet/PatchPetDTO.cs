@@ -19,7 +19,8 @@ namespace VeterinaryAPI.DTOs.Pet
         [StringLength(PetConstants.BREED_MAX_LENGTH)]
         public string Breed { get; set; }
 
-        [StringLength(PetConstants.MAX_AGE)]
+       
+        [Range(PetConstants.MIN_AGE, PetConstants.MAX_AGE)]
         public double Age { get; set; }
     }
 }

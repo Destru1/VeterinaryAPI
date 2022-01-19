@@ -13,6 +13,7 @@ namespace VeterinaryAPI.Common.Constants.ModelConstants
         public const int BREED_MAX_LENGTH = 64;
 
         public const int MAX_AGE = 20;
+        public const int MIN_AGE = 0;
 
 
     }
