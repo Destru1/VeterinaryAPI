@@ -26,11 +26,11 @@ namespace VeterinaryAPI.Database.Models.Veterinary
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(VeterinarianConstants.PHONENUMBER_MAX_LENGHT)]
+        [StringLength(VeterinarianConstants.PHONENUMBER_MAX_LENGTH)]
         public string PhoneNumber { get; set; }
 
         [Required]
-        [StringLength(VeterinarianConstants.EMAIL_MAX_LENGHT)]
+        [StringLength(VeterinarianConstants.EMAIL_MAX_LENGTH)]
         public string Email { get; set; }
 
         public virtual ICollection<VeterinarianPetMapping> Pets { get; set; }
