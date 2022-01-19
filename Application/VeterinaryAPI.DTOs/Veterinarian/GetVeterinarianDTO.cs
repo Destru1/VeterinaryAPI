@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.DTOs.Positions;
 
 namespace VeterinaryAPI.DTOs.Veterinarian
 {
-   public class GetVeterinarianDTO
+    public class GetVeterinarianDTO
     {
         public Guid Id { get; set; }
 
@@ -21,6 +22,8 @@ namespace VeterinaryAPI.DTOs.Veterinarian
         public DateTime CreatedOn { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
+
+        public GetAllPositionsDTO Positions {get; set;}
 
       
     }

@@ -15,5 +15,7 @@ namespace VeterinaryAPI.DTOs.Veterinarian
         public string PhoneNumber { get; set; }
 
         public string Email { get; set; }
+
+        public IEnumerable<Guid> PositionsId { get; set; }
     }
 }

@@ -13,10 +13,12 @@ namespace VeterinaryAPI.Controllers
     public class VeterinarianController : BaseAPIController
     {
         private readonly IVeterinarianService veterinarianService;
+        private readonly IVeterinarianPositionMappingService veterinarianPositionMappingService;
 
-        public VeterinarianController(IVeterinarianService veterinarianService)
+        public VeterinarianController(IVeterinarianService veterinarianService, IVeterinarianPositionMappingService veterinarianPositionMappingService)
         {
             this.veterinarianService = veterinarianService;
+            this.veterinarianPositionMappingService = veterinarianPositionMappingService;
         }
 
         [HttpGet]
@@ -62,11 +64,41 @@ namespace VeterinaryAPI.Controllers
             return this.Ok();
         }
 
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> Patch(Guid id, PatchVeterinarianDTO model)
+        {
+            bool resultFormPartialUpdate = await this.veterinarianService.PartialUpdateAsync(id, model);
+            if (this.ModelState.IsValid == false)
+            {
+                //Todo throw model error;
+            }
+            if (resultFormPartialUpdate == false)
+            {
+                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+            }
+
+            return this.Ok();
+        }
+
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             bool resultFromDelete = await this.veterinarianService.DeleteAsync(id);
+
+            if (resultFromDelete == false)
+            {
+                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+            }
+
+            return this.Ok(resultFromDelete);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid veterinarianId, Guid positionId)
+        {
+            bool resultFromDelete = await this.veterinarianPositionMappingService.DeleteAsync(veterinarianId, positionId);
 
             if (resultFromDelete == false)
             {

@@ -12,10 +12,12 @@ namespace VeterinaryAPI.Infastructure.AutoMapperProfiles
     {
         public VeterinarianProfile()
         {
-            this.CreateMap<Veterinarian, GetVeterinarianDTO>();
-
+         
             this.CreateMap<IEnumerable<Veterinarian>, GetAllVeterinariansDTO>()
                 .ForMember(gav => gav.Veterinarians, t => t.MapFrom(veterinarians => veterinarians));
+
+            this.CreateMap<Veterinarian, GetVeterinarianDTO>()
+             .ForMember(gvd => gvd.Positions, p => p.MapFrom(position => position.Positions));
 
             this.CreateMap<PostVeterinarianDTO, Veterinarian>();
             this.CreateMap<PutVeterinarianDTO, Veterinarian>();
