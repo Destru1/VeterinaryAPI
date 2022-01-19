@@ -13,11 +13,13 @@ namespace VeterinaryAPI.Controllers
     public class OwnerController : BaseAPIController
     {
         private readonly IOwnerService ownerService;
+        private readonly IOwnerPetMappingService ownerPetMappingService;
 
 
-        public OwnerController(IOwnerService ownerService)
+        public OwnerController(IOwnerService ownerService, IOwnerPetMappingService ownerPetMappingService)
         {
             this.ownerService = ownerService;
+            this.ownerPetMappingService = ownerPetMappingService;
         }
 
         [HttpGet]
@@ -95,6 +97,19 @@ namespace VeterinaryAPI.Controllers
             }
 
             return this.Ok(resultFromDelete);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid ownerId, Guid petId)
+        {
+            bool resultFormDelete = await this.ownerPetMappingService.DeleteAsync(ownerId, petId);
+
+            if (resultFormDelete == false)
+            {
+                return this.BadRequest(ExeptionMessages.SOMETHING_WENT_WRONG_MESSAGE);
+            }
+
+            return this.Ok(resultFormDelete);
         }
     }
 }
