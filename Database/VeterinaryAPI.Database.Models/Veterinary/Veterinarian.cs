@@ -15,6 +15,7 @@ namespace VeterinaryAPI.Database.Models.Veterinary
         {
             this.Pets = new HashSet<VeterinarianPetMapping>();
             this.Positions = new HashSet<VeterinarianPositionMapping>();
+            this.Users = new HashSet<VeterinarianUserMapping>();
         }
 
         [Required]
@@ -35,5 +36,6 @@ namespace VeterinaryAPI.Database.Models.Veterinary
 
         public virtual ICollection<VeterinarianPetMapping> Pets { get; set; }
         public virtual ICollection<VeterinarianPositionMapping> Positions { get; set; }
+        public virtual ICollection<VeterinarianUserMapping> Users { get; set; }
     }
 }

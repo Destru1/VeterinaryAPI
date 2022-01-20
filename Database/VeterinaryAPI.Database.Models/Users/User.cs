@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants.ModelConstants;
+using VeterinaryAPI.Database.Models.Veterinary;
 
 namespace VeterinaryAPI.Database.Models.Users
 {
@@ -14,6 +15,7 @@ namespace VeterinaryAPI.Database.Models.Users
             : base()
         {
             this.Roles = new HashSet<UserRoleMapping>();
+            this.Veterinarians = new HashSet<VeterinarianUserMapping>();
         }
         [Required]
         [StringLength(UserConstants.FIRST_NAME_MAX_LENGTH)]
@@ -34,6 +36,7 @@ namespace VeterinaryAPI.Database.Models.Users
         public string Salt { get; set; }
 
         public virtual ICollection<UserRoleMapping> Roles { get; set; }
+        public virtual ICollection<VeterinarianUserMapping> Veterinarians { get; set; }
 
     }
 }

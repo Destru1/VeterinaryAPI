@@ -26,11 +26,12 @@ namespace VeterinaryAPI.Database
         public DbSet<Role> Roles { get; set; }
 
 
+        public DbSet<OwnerPetMapping> OwnerPetMappings { get; set; }
         public DbSet<VeterinarianPetMapping> VeterinariansPetsMapping { get; set; }
 
-        public DbSet<OwnerPetMapping> OwnerPetMappings { get; set; }
-
         public DbSet<VeterinarianPositionMapping> VeterinariansPositionsMapping { get; set; }
+
+        public DbSet<VeterinarianUserMapping> VeterinariansUsersMapping { get; set; }
 
         public DbSet<UserRoleMapping> UserRoleMapping { get; set; }
 
