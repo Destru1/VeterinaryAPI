@@ -15,6 +15,7 @@ using VeterinaryAPI.Common;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Users;
+using VeterinaryAPI.DTOs.Roles;
 using VeterinaryAPI.DTOs.User;
 using VeterinaryAPI.Services.Database.Interfaces;
 
@@ -23,12 +24,18 @@ namespace VeterinaryAPI.Services.Database
     public class UserService : BaseService<User>, IUserService
     {
         private readonly ApplicationSettings options;
+        private readonly IUserRoleMappingService userRoleMappingService;
+        private readonly IRoleService roleService;
         public UserService(VeterinaryAPIDbcontext dbcontext,
             IMapper mapper,
-            IOptions<ApplicationSettings> options)
+            IOptions<ApplicationSettings> options,
+            IUserRoleMappingService userRoleMappingService,
+            IRoleService roleService)
             :base(dbcontext, mapper)
         {
             this.options = options.Value;
+            this.userRoleMappingService = userRoleMappingService;
+            this.roleService = roleService;
         }
 
         public async Task<T> RegisterAsync<T>(PostUserRegisterDTO model)
@@ -48,7 +55,9 @@ namespace VeterinaryAPI.Services.Database
             await this.DbSet.AddAsync(userToCreate);
             await this.Dbcontext.SaveChangesAsync();
 
-            //todo user roles
+            GetRoleIdDTO role = await this.roleService.GetRoleByNameAsync<GetRoleIdDTO>(GlobalConstants.USER_ROLE_NAME);
+
+            await this.userRoleMappingService.AddRoleToUserAsync(role.Id, userToCreate.Id);
 
 
             T userToReturn = this.Mapper.Map<T>(userToCreate);
@@ -95,7 +104,7 @@ namespace VeterinaryAPI.Services.Database
 
             if (user == null)
             {
-                throw new ArgumentException(ExceptionMessages.USER_DOES_NOT_EXIST_MESSAGE);
+                //throw new ArgumentException(ExceptionMessages.USER_DOES_NOT_EXIST_MESSAGE);
             }
 
             T userToReturn = this.Mapper.Map<T>(user);
@@ -132,9 +141,9 @@ namespace VeterinaryAPI.Services.Database
             return hashed;
         }
 
-        public Task<bool> IsThereAnyDataInTableAsync()
+        public async Task<bool> IsThereAnyDataInTableAsync()
         {
-            throw new NotImplementedException();
+            return await this.DbSet.AnyAsync();
         }
 
 

@@ -25,23 +25,17 @@ namespace VeterinaryAPI.Controllers
 
             string token = await this.userService.LoginAsync(model);
 
-            if (token == null)
-            {
-                throw new ArgumentException();
-            }
-            return this.Ok(token);
+            GetTokenDTO tokenObject = new GetTokenDTO(token);
+
+            return this.Ok(tokenObject);
         }
 
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register(PostUserRegisterDTO model)
         {
-            User user = await this.userService.RegisterAsync<User>(model);
+            GetUserInformationDTO user = await this.userService.RegisterAsync<GetUserInformationDTO>(model);
 
-            if (user == null)
-            {
-                throw new ArgumentException();
-            }
             return this.Ok(user);
         }
     }

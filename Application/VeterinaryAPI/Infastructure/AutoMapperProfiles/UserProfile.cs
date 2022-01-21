@@ -21,6 +21,10 @@ namespace VeterinaryAPI.Infastructure.AutoMapperProfiles
             this.CreateMap<UserRoleMapping, GetRolesForSessionDTO>()
                 .ForMember(grfsd => grfsd.RoleName, x => x.MapFrom(urm => urm.Role.Name));
 
+            this.CreateMap<User, GetUserInformationDTO>();
+
+            this.CreateMap<User, GetUserIdDTO>();
+
             this.CreateMap<PostUserLoginDTO, User>();
 
             this.CreateMap<PostUserRegisterDTO, User>();

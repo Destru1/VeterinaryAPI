@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\VeterinaryAPI.Database.Models\VeterinaryAPI.Database.Models.csproj" />
+    <ProjectReference Include="..\..\Database\VeterinaryAPI.Database.Seed\VeterinaryAPI.Database.Seed.csproj" />
     <ProjectReference Include="..\VeterinaryAPI.Services\VeterinaryAPI.Services.csproj" />
   </ItemGroup>
 

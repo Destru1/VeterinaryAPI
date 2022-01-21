@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeterinaryAPI.DTOs", "Appli
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C0A752B2-1665-4F3B-8CA8-E05B3CC26D57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeterinaryAPI.Common", "Common\VeterinaryAPI.Common\VeterinaryAPI.Common.csproj", "{C9B51954-16CA-4244-991D-D25E2527361B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeterinaryAPI.Common", "Common\VeterinaryAPI.Common\VeterinaryAPI.Common.csproj", "{C9B51954-16CA-4244-991D-D25E2527361B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeterinaryAPI.Database.Seed", "Database\VeterinaryAPI.Database.Seed\VeterinaryAPI.Database.Seed.csproj", "{C00A235F-82AD-4A19-B09E-FA641C3A98C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{C9B51954-16CA-4244-991D-D25E2527361B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9B51954-16CA-4244-991D-D25E2527361B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9B51954-16CA-4244-991D-D25E2527361B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C00A235F-82AD-4A19-B09E-FA641C3A98C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C00A235F-82AD-4A19-B09E-FA641C3A98C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C00A235F-82AD-4A19-B09E-FA641C3A98C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C00A235F-82AD-4A19-B09E-FA641C3A98C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{1511A53C-651D-4D02-A047-4BC89B43FC66} = {BA9ACE57-29B9-4B7B-9A59-1563ED0FEE0E}
 		{1BE195FC-158C-4B68-9422-656620CEA309} = {094C6B55-D750-42C7-8968-C298F010A34C}
 		{C9B51954-16CA-4244-991D-D25E2527361B} = {C0A752B2-1665-4F3B-8CA8-E05B3CC26D57}
+		{C00A235F-82AD-4A19-B09E-FA641C3A98C1} = {BA9ACE57-29B9-4B7B-9A59-1563ED0FEE0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E081D7D8-32D9-4592-A4E2-38743CEC8EAD}

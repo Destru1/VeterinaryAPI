@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common;
 using VeterinaryAPI.Database;
+using VeterinaryAPI.Database.Seed;
 using VeterinaryAPI.Infastructure.Middleware;
 using VeterinaryAPI.Services.Database;
 using VeterinaryAPI.Services.Database.Interfaces;
@@ -61,6 +62,8 @@ namespace VeterinaryAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VeterinaryAPI v1"));
+
+                app.SeedDatabaseAsync().GetAwaiter().GetResult();
             }
 
             app.UseHttpsRedirection();
@@ -68,6 +71,7 @@ namespace VeterinaryAPI
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseRouting();
+
 
             app.UseAuthorization();
             app.UseMiddleware<JwtMiddleware>();
@@ -88,6 +92,8 @@ namespace VeterinaryAPI
             services.AddScoped<IVeterinarianPetMappingService, VeterinarianPetMappingService>();
             services.AddScoped<IVeterinarianPositionMappingService, VeterinarianPositionService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserRoleMappingService, UserRoleMappingService>();
         }
     }
 }
