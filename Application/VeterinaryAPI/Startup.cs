@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Infastructure.Middleware;
 using VeterinaryAPI.Services.Database;
@@ -38,6 +39,8 @@ namespace VeterinaryAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VeterinaryAPI", Version = "v1" });
             });
+
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             services.AddDbContext<VeterinaryAPIDbcontext>();
 
@@ -67,6 +70,7 @@ namespace VeterinaryAPI
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
@@ -83,6 +87,7 @@ namespace VeterinaryAPI
             services.AddScoped<IOwnerPetMappingService, OwnerPetMappingService>();
             services.AddScoped<IVeterinarianPetMappingService, VeterinarianPetMappingService>();
             services.AddScoped<IVeterinarianPositionMappingService, VeterinarianPositionService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

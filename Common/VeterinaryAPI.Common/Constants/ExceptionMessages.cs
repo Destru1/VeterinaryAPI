@@ -18,5 +18,12 @@ namespace VeterinaryAPI.Common.Constants
         public const string VETERINARIAN_PET_MAPPING_DOES_NOT_EXIST_MESSAGE = "There is no relation between this veterinarian and pet";
         public const string OWNER_PET_MAPPING_DOES_NOT_EXIST_MESSAGE = "There is no relation between this owner and pet";
         public const string VETERINARIAN_POSITION_MAPPING_DOES_NOT_EXIST_MESSAGE = "There is no relation between this veterinarian and position";
+        public const string USER_DOES_NOT_EXIST_MESSAGE = "User with this id dosen't exist.";
+        public const string USER_EXIST_MESSAGE = "User with this email exists.";
+        public const string PASSWORD_DOES_NOT_MATCH = "Passwords does not match.";
+        public const string USER_UNAUTHENTICATED_MESSAGE = "Log in to continue.";
+        public const string USER_UNAUTHORISED_MESSAGE = "User in unauthorisied for this kind of action.";
+
+
     }
 }

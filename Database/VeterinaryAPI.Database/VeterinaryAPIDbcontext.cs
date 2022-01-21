@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common;
 using VeterinaryAPI.Database.Models.Users;
 using VeterinaryAPI.Database.Models.Veterinary;
 
@@ -12,7 +14,12 @@ namespace VeterinaryAPI.Database
 {
     public class VeterinaryAPIDbcontext : DbContext
     {
+        private readonly ApplicationSettings options;
 
+        public VeterinaryAPIDbcontext(IOptions<ApplicationSettings> options)
+        {
+            this.options = options.Value;
+        }
 
         public DbSet<Veterinarian> Veterinarians { get; set; }
 
@@ -39,7 +46,7 @@ namespace VeterinaryAPI.Database
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Server =.; Database =VeterinaryAPI; Integrated Security = true; ");
+            optionsBuilder.UseSqlServer(options.DbConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
