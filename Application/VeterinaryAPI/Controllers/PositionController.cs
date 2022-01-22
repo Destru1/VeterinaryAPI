@@ -16,7 +16,14 @@ namespace VeterinaryAPI.Controllers
         {
             this.positionService = positionService;
         }
-
+        /// <summary>
+        ///  Get position by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <returns>Returns the position entity by the given id</returns>
+        /// <response code="200">Returns the position entity by the given id</response>
+        /// <response code="404">If the position is null</response>
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> Get(Guid id)
@@ -31,6 +38,12 @@ namespace VeterinaryAPI.Controllers
             return this.Ok(position);
         }
 
+
+        /// <summary>
+        /// Get all positions
+        /// </summary>
+        /// <returns>Returns all positions </returns>
+        /// <response code="200">Returns all owners </response>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -39,6 +52,22 @@ namespace VeterinaryAPI.Controllers
             return this.Ok(positions);
         }
 
+        /// <summary>
+        /// Create position
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/Position
+        ///     {
+        ///        "name": "PositionName"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="model">Body model with data</param>
+        /// <returns>The position that is created</returns>
+        /// <response code="200">If the position is created successfully</response>
+        /// <response code="400">If the body is not correct</response>
         [HttpPost]
         public async Task<IActionResult> Post(PostPositionDTO model)
         {
@@ -47,6 +76,23 @@ namespace VeterinaryAPI.Controllers
             return this.CreatedAtRoute(this.RouteData, createdPosition);
         }
 
+        /// <summary>
+        /// Update position
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/Position
+        ///     {
+        ///        "name": "PositionName"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="id">The position Id</param>
+        /// <param name="model">Body model with data</param>
+        /// <returns>The result form update action</returns>
+        /// <response code="200">If the position is updated successfully</response>
+        /// <response code="400">If the body is not correct</response>
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> Put(Guid id, PutPositionDTO model)
@@ -61,6 +107,13 @@ namespace VeterinaryAPI.Controllers
             return this.Ok();
         }
 
+        /// <summary>
+        /// Delete position by Id
+        /// </summary>
+        /// <param name="id">The position id</param>
+        /// <returns>The result from the delete action</returns>
+        /// <response code="200">If the position is deleted successfully</response>
+        /// <response code="400">If the position is null</response>
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete(Guid id)

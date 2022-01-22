@@ -23,6 +23,14 @@ namespace VeterinaryAPI.Controllers
             this.veterinarianPositionMappingService = veterinarianPositionMappingService;
         }
 
+        /// <summary>
+        ///  Get veterinarian by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <returns>Returns the veterinarian entity by the given id</returns>
+        /// <response code="200">Returns the veterinarian entity by the given id</response>
+        /// <response code="404">If the veterinarian is null</response>
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> Get(Guid id)
@@ -37,6 +45,11 @@ namespace VeterinaryAPI.Controllers
             return this.Ok(veterinarian);
         }
 
+        /// <summary>
+        /// Get all veterinarians
+        /// </summary>
+        /// <returns>Returns all veterinarians </returns>
+        /// <response code="200">Returns all veterinarians </response>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -45,6 +58,25 @@ namespace VeterinaryAPI.Controllers
             return this.Ok(veterinarians);
         }
 
+        /// <summary>
+        /// Create veterinarian
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/Veterinarian
+        ///     {
+        ///        "firstName": "VeterinarianFirstName",
+        ///        "lastName": "VeterinarianLastName",
+        ///        "phoneNumber": "VeterinarianPhoneNumber",
+        ///        "email": "VeterinarianEmail",
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="model">Body model with data</param>
+        /// <returns>The veterinarian that is created</returns>
+        /// <response code="200">If the veterinarian is created successfully</response>
+        /// <response code="400">If the body is not correct</response>
         [HttpPost]
         public async Task<IActionResult> Post(PostVeterinarianDTO model)
         {
@@ -53,6 +85,26 @@ namespace VeterinaryAPI.Controllers
             return this.CreatedAtRoute(this.RouteData, createdVeterinarian);
         }
 
+        /// <summary>
+        /// Update veterinarian
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/Veterinarian
+        ///     {
+        ///        "firstName": "VeterinarianFirstName",
+        ///        "lastName": "VeterinarianLastName",
+        ///        "phoneNumber": "VeterinarianPhoneNumber",
+        ///        "email": "VeterinarianEmail",
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="id">The veterinarian Id</param>
+        /// <param name="model">Body model with data</param>
+        /// <returns>The result form update action</returns>
+        /// <response code="200">If the veterinarian is updated successfully</response>
+        /// <response code="400">If the body is not correct</response>
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> Put(Guid id, PutVeterinarianDTO model)
@@ -66,6 +118,30 @@ namespace VeterinaryAPI.Controllers
             return this.Ok();
         }
 
+
+        /// <summary>
+        /// Partial update veterinarian
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PATCH /api/Veterinarian
+        ///     {
+        ///        "firstName": "VeterinarianFirstName",
+        ///        "lastName": "VeterinarianLastName",
+        ///        "phoneNumber": "VeterinarianPhoneNumber",
+        ///        "email": "VeterinarianEmail",
+        ///        "PositionsId"[
+        ///         "PositionId"
+        ///           ]
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="id">The veterinarian Id</param>
+        /// <param name="model">Body model with data</param>
+        /// <returns>The result form update action</returns>
+        /// <response code="200">If the veterinarian is updated successfully</response>
+        /// <response code="400">If the body is not correct</response>
         [HttpPatch]
         [Route("{id}")]
         public async Task<IActionResult> Patch(Guid id, PatchVeterinarianDTO model)
@@ -84,6 +160,13 @@ namespace VeterinaryAPI.Controllers
             return this.Ok();
         }
 
+        /// <summary>
+		/// Delete veterinarian by Id
+		/// </summary>
+		/// <param name="id">The veterinarian id</param>
+		/// <returns>The result from the delete action</returns>
+		/// <response code="200">If the veterinarian is deleted successfully</response>
+		/// <response code="400">If the veterinarian is null</response>
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete(Guid id)
@@ -98,6 +181,15 @@ namespace VeterinaryAPI.Controllers
             return this.Ok(resultFromDelete);
         }
 
+
+        /// <summary>
+        /// Delete position from veterinarian
+        /// </summary>
+        /// <param name="veterinarianId">The veterinarian id</param>
+        /// <param name="positionId">The position id</param>
+        /// <returns>The result from the delete action</returns>
+        /// <response code="200">If the relation is deleted successfully</response>
+        /// <response code="400">If there is no relation</response>
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid veterinarianId, Guid positionId)
         {
