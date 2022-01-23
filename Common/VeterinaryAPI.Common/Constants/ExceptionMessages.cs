@@ -24,6 +24,7 @@ namespace VeterinaryAPI.Common.Constants
         public const string USER_UNAUTHENTICATED_MESSAGE = "Log in to continue.";
         public const string USER_UNAUTHORISED_MESSAGE = "User in unauthorisied for this kind of action.";
         public const string ROLE_DOES_NOT_EXIST_MESSAGE = "Role with this name dosen't exist.";
+        public const string APPOINTMENT_DATE_INVALID_MESSAGE = "Appointment date can't be before today's date";
 
     }
 }

@@ -39,6 +39,8 @@ namespace VeterinaryAPI.Services.Database
 
         public async Task<T> CreateRelationAsync<T>(Guid veterinarianId, Guid petId, DateTime appointmentDate)
         {
+            this.CheckDateTime(appointmentDate);
+
             VeterinarianPetMapping model = new VeterinarianPetMapping()
             {
                 VeterinarianId = veterinarianId,
@@ -54,6 +56,8 @@ namespace VeterinaryAPI.Services.Database
 
         public async Task<T> UpdateApointmentDateAsync<T>(Guid veterinarianId, Guid petId, DateTime appointmentDate)
         {
+            this.CheckDateTime(appointmentDate);
+
             VeterinarianPetMapping model =
                 await this.GetModelByVeterinarianIdAndPetIdAsync<VeterinarianPetMapping>(veterinarianId, petId);
 
@@ -80,5 +84,13 @@ namespace VeterinaryAPI.Services.Database
 
        
      
+        private void CheckDateTime(DateTime appointmentDate)
+        {
+            if (DateTime.Compare(DateTime.UtcNow , appointmentDate) > 0)
+            {
+                throw new ArgumentException(ExceptionMessages.APPOINTMENT_DATE_INVALID_MESSAGE);
+            }
+        }
+
     }
 }
