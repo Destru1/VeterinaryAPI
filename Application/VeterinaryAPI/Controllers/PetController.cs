@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Pet;
+using VeterinaryAPI.Infastructure.Filters;
 using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Controllers
@@ -29,6 +30,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="404">If the pet is null</response>
         [HttpGet]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.USER_ROLE_NAME, GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Get(Guid id)
         {
             GetPetDTO pet = await this.petService.GetByIdAsync<GetPetDTO>(id);
@@ -48,7 +50,7 @@ namespace VeterinaryAPI.Controllers
         /// <returns>Returns all pets </returns>
         /// <response code="200">Returns all pets </response>
         [HttpGet]
-
+        [JwtAuthorize(Roles = new[] { GlobalConstants.USER_ROLE_NAME, GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Get()
         {
             GetAllPetsDTO pets = await this.petService.GetAllAsync<GetAllPetsDTO>();
@@ -78,6 +80,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="200">If the pet is created successfully</response>
         /// <response code="400">If the body is not correct</response>
         [HttpPost]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Post(PostPetDTO model)
         {
             GetPetDTO createdPet = await this.petService.AddAsync<GetPetDTO>(model);
@@ -107,6 +110,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="400">If the body is not correct</response>
         [HttpPut]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Put(Guid id, PutPetDTO model)
         {
             bool resultFromUpdate = await this.petService.UpdateAsync(id, model);
@@ -141,6 +145,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="400">If the body is not correct</response>
         [HttpPatch]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Patch(Guid id, PatchPetDTO model)
         {
             bool resultFromUpdate = await this.petService.PartialUpdateAsync(id, model);
@@ -161,7 +166,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="400">If the pet is null</response>
         [HttpDelete]
         [Route("{id}")]
-
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Delete(Guid id)
         {
             bool resultFromDelete = await this.petService.DeleteAsync(id);

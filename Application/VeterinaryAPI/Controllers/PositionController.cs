@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.DTOs.Positions;
+using VeterinaryAPI.Infastructure.Filters;
 using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Controllers
@@ -26,6 +27,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="404">If the position is null</response>
         [HttpGet]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.USER_ROLE_NAME, GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Get(Guid id)
         {
             GetPositionDTO position = await this.positionService.GetByIdAsync<GetPositionDTO>(id);
@@ -45,6 +47,7 @@ namespace VeterinaryAPI.Controllers
         /// <returns>Returns all positions </returns>
         /// <response code="200">Returns all owners </response>
         [HttpGet]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.USER_ROLE_NAME, GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Get()
         {
             GetAllPositionsDTO positions = await this.positionService.GetAllAsync<GetAllPositionsDTO>();
@@ -69,6 +72,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="200">If the position is created successfully</response>
         /// <response code="400">If the body is not correct</response>
         [HttpPost]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Post(PostPositionDTO model)
         {
             GetPositionDTO createdPosition = await this.positionService.AddAsync<GetPositionDTO>(model);
@@ -95,6 +99,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="400">If the body is not correct</response>
         [HttpPut]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Put(Guid id, PutPositionDTO model)
         {
             bool resultFromUpdate = await this.positionService.UpdateAsync(id, model);
@@ -116,6 +121,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="400">If the position is null</response>
         [HttpDelete]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Delete(Guid id)
         {
             bool resultFromDelete = await this.positionService.DeleteAsync(id);

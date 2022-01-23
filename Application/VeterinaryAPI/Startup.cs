@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using VeterinaryAPI.Common;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Seed;
+using VeterinaryAPI.Infastructure.Extensions;
+using VeterinaryAPI.Infastructure.Filters;
 using VeterinaryAPI.Infastructure.Middleware;
 using VeterinaryAPI.Services.Database;
 using VeterinaryAPI.Services.Database.Interfaces;
@@ -40,6 +42,17 @@ namespace VeterinaryAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VeterinaryAPI", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = $"JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below. Example: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.OperationFilter<AuthResponsesOperationFilter>();
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -68,6 +81,8 @@ namespace VeterinaryAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VeterinaryAPI v1"));
 
+
+                app.MigrateDatabase().GetAwaiter().GetResult();
                 app.SeedDatabaseAsync().GetAwaiter().GetResult();
             }
 

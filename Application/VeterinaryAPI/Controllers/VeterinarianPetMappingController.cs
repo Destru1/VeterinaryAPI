@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.DTOs.Pet;
 using VeterinaryAPI.DTOs.Veterinarian;
 using VeterinaryAPI.DTOs.VeterinarianPetMapping;
+using VeterinaryAPI.Infastructure.Filters;
 using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Controllers
@@ -36,6 +38,8 @@ namespace VeterinaryAPI.Controllers
         /// <response code="200">Returns the appointment entity by the given id's</response>
         /// <response code="404">If the appointment is null</response>
         [HttpGet]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.USER_ROLE_NAME, GlobalConstants.ADMIN_ROLE_NAME })]
+
         public async Task<IActionResult> Get(Guid veterinarianId, Guid petId)
         {
             var veterinarian = await this.veterinarianService.GetByIdAsync<GetVeterinarianDTO>(veterinarianId);
@@ -63,6 +67,8 @@ namespace VeterinaryAPI.Controllers
         /// <response code="200">If the appointment is created successfully</response>
         /// <response code="400">If the body is not correct</response>
         [HttpPost]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
+
         public async Task<IActionResult> Post(PostVeterinarianPetDTO model)
         {
             var veterinarian = await this.veterinarianService.GetByIdAsync<GetVeterinarianDTO>(model.VeterinarianId);
@@ -92,6 +98,8 @@ namespace VeterinaryAPI.Controllers
         /// <response code="200">If the appointment is updated successfully</response>
         /// <response code="400">If the body is not correct</response>
         [HttpPatch]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
+
         public async Task<IActionResult> Patch(PatchVeterinarianPetDTO model)
         {
             var veterinarian = await this.veterinarianService.GetByIdAsync<GetVeterinarianDTO>(model.VeterinarianId);
@@ -110,6 +118,8 @@ namespace VeterinaryAPI.Controllers
 		/// <response code="200">If the appointment is deleted successfully</response>
 		/// <response code="400">If the appointment is null</response>
         [HttpDelete]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
+
         public async Task<IActionResult> Delete(Guid veterinarianId, Guid petId)
         {
             var veterinarian = await this.veterinarianService.GetByIdAsync<GetVeterinarianDTO>(veterinarianId);

@@ -9,6 +9,7 @@ using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Owner;
+using VeterinaryAPI.Infastructure.Filters;
 using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Controllers
@@ -36,6 +37,7 @@ namespace VeterinaryAPI.Controllers
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.USER_ROLE_NAME, GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Get(Guid id)
         {
             GetOwnerDTO owner = await this.ownerService.GetByIdAsync<GetOwnerDTO>(id);
@@ -54,6 +56,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="200">Returns all owners </response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.USER_ROLE_NAME, GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Get()
         {
             GetAllOwnersDTO owners = await this.ownerService.GetAllAsync<GetAllOwnersDTO>();
@@ -81,6 +84,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="200">If the owner is created successfully</response>
         /// <response code="400">If the body is not correct</response>
         [HttpPost]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Post(PostOwnerDTO model)
         {
             GetOwnerDTO createdOwner = await this.ownerService.AddAsync<GetOwnerDTO>(model);
@@ -109,6 +113,7 @@ namespace VeterinaryAPI.Controllers
         /// <response code="400">If the body is not correct</response>
         [HttpPut]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Put(Guid id, PutOwnerDTO model)
         {
             bool resultFromUpdate = await this.ownerService.UpdateAsync(id, model);
@@ -146,6 +151,7 @@ namespace VeterinaryAPI.Controllers
 
         [HttpPatch]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Patch(Guid id, PatchOwnerDTO model)
         {
             bool resultFormUpdate = await this.ownerService.PartialUpdateAsync(id, model);
@@ -173,6 +179,7 @@ namespace VeterinaryAPI.Controllers
 		/// <response code="400">If the owner is null</response>
         [HttpDelete]
         [Route("{id}")]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Delete(Guid id)
         {
             bool resultFromDelete = await this.ownerService.DeleteAsync(id);
@@ -194,6 +201,7 @@ namespace VeterinaryAPI.Controllers
 		/// <response code="200">If the relation is deleted successfully</response>
 		/// <response code="400">If there is no relation</response>
         [HttpDelete]
+        [JwtAuthorize(Roles = new[] { GlobalConstants.ADMIN_ROLE_NAME })]
         public async Task<IActionResult> Delete(Guid ownerId, Guid petId)
         {
             bool resultFormDelete = await this.ownerPetMappingService.DeleteAsync(ownerId, petId);
