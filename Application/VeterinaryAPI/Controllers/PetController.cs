@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
-using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Pet;
 using VeterinaryAPI.Infastructure.Filters;
 using VeterinaryAPI.Services.Database.Interfaces;

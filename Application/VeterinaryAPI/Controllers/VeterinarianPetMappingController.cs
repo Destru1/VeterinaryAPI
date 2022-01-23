@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.DTOs.Pet;
@@ -20,8 +17,8 @@ namespace VeterinaryAPI.Controllers
         private readonly IPetService petService;
         private readonly IVeterinarianPetMappingService veterinarianPetMappingService;
 
-        public VeterinarianPetMappingController(IVeterinarianService veterinarianService, 
-            IPetService petService, 
+        public VeterinarianPetMappingController(IVeterinarianService veterinarianService,
+            IPetService petService,
             IVeterinarianPetMappingService veterinarianPetMappingService)
         {
             this.veterinarianService = veterinarianService;

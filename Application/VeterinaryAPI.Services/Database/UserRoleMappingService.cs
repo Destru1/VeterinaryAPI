@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models.Users;
@@ -11,7 +8,7 @@ using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Services.Database
 {
-   public class UserRoleMappingService : BaseService<UserRoleMapping>, IUserRoleMappingService
+    public class UserRoleMappingService : BaseService<UserRoleMapping>, IUserRoleMappingService
     {
 
         public UserRoleMappingService(VeterinaryAPIDbcontext dbcontext, IMapper mapper)

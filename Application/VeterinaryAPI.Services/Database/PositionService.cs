@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
@@ -18,7 +17,7 @@ namespace VeterinaryAPI.Services.Database
     {
 
         public PositionService(VeterinaryAPIDbcontext dbcontext, IMapper mapper)
-            : base(dbcontext,mapper)
+            : base(dbcontext, mapper)
         {
 
         }
@@ -33,7 +32,7 @@ namespace VeterinaryAPI.Services.Database
             T mappedPositions = this.Mapper.Map<T>(positions);
             return mappedPositions;
         }
-     
+
 
         public async Task<T> GetByIdAsync<T>(Guid id)
         {

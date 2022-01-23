@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VeterinaryAPI.DTOs.Positions;
 
 namespace VeterinaryAPI.DTOs.Veterinarian
@@ -23,8 +19,8 @@ namespace VeterinaryAPI.DTOs.Veterinarian
 
         public DateTime? UpdatedOn { get; set; }
 
-        public GetAllPositionsDTO Positions {get; set;}
+        public GetAllPositionsDTO Positions { get; set; }
 
-      
+
     }
 }

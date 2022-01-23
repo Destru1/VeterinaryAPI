@@ -4,9 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -31,7 +29,7 @@ namespace VeterinaryAPI.Services.Database
             IOptions<ApplicationSettings> options,
             IUserRoleMappingService userRoleMappingService,
             IRoleService roleService)
-            :base(dbcontext, mapper)
+            : base(dbcontext, mapper)
         {
             this.options = options.Value;
             this.userRoleMappingService = userRoleMappingService;
@@ -81,8 +79,8 @@ namespace VeterinaryAPI.Services.Database
             return token;
         }
 
-     
-        public async Task<T>  GetUserByIdAsync<T>(Guid id)
+
+        public async Task<T> GetUserByIdAsync<T>(Guid id)
         {
             User user = await this.DbSet
                  .Include(u => u.Roles)
@@ -108,7 +106,7 @@ namespace VeterinaryAPI.Services.Database
             }
 
             T userToReturn = this.Mapper.Map<T>(user);
-            return userToReturn; 
+            return userToReturn;
         }
 
         public string GeteratePasswordSalt()

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
@@ -20,12 +19,12 @@ namespace VeterinaryAPI.Services.Database
     {
         private readonly IPetService petService;
         private readonly IOwnerPetMappingService ownerPetMappingService;
-        public OwnerService(VeterinaryAPIDbcontext dbcontext, 
+        public OwnerService(VeterinaryAPIDbcontext dbcontext,
             IMapper mapper,
             IActionContextAccessor actionContextAccessor,
             IPetService petService,
             IOwnerPetMappingService ownerPetMappingService)
-            : base(dbcontext,mapper,actionContextAccessor)
+            : base(dbcontext, mapper, actionContextAccessor)
         {
             this.petService = petService;
             this.ownerPetMappingService = ownerPetMappingService;
@@ -158,7 +157,7 @@ namespace VeterinaryAPI.Services.Database
                 bool isPetAlreadyWithOwner = owner.Pets
                     .Any(opm => opm.OwnerId == owner.Id && opm.PetId == pet.Id);
 
-                    if (isPetAlreadyWithOwner)
+                if (isPetAlreadyWithOwner)
                 {
                     this.AddModelError("PetId", string.Format(ExceptionMessages.PET_ALREADY_ADDED_MESSAGE, petId));
                     continue;
@@ -172,6 +171,6 @@ namespace VeterinaryAPI.Services.Database
                 await this.ownerPetMappingService.AddAsync<OwnerPetMapping>(ownerPetMapping);
             }
         }
-        
+
     }
 }

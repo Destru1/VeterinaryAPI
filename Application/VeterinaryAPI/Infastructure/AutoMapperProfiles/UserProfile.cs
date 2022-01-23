@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VeterinaryAPI.Database.Models.Users;
 using VeterinaryAPI.DTOs.Roles;
 using VeterinaryAPI.DTOs.User;
@@ -14,7 +10,7 @@ namespace VeterinaryAPI.Infastructure.AutoMapperProfiles
 
         public UserProfile()
         {
-     
+
             this.CreateMap<User, GetUserForSessionDTO>()
                 .ForMember(gufsd => gufsd.Roles, x => x.MapFrom(u => u.Roles));
 

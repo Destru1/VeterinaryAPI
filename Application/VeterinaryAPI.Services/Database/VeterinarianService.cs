@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
@@ -21,9 +21,10 @@ namespace VeterinaryAPI.Services.Database
         private readonly IVeterinarianPositionMappingService veterinarianPositionMappingService;
         public VeterinarianService(VeterinaryAPIDbcontext dbcontext,
             IMapper mapper,
+            IActionContextAccessor actionContextAccessor,
             IPositionService positionService,
             IVeterinarianPositionMappingService veterinarianPositionMappingService)
-            : base(dbcontext,mapper)
+            : base(dbcontext, mapper, actionContextAccessor)
         {
             this.positionService = positionService;
             this.veterinarianPositionMappingService = veterinarianPositionMappingService;
@@ -56,8 +57,8 @@ namespace VeterinaryAPI.Services.Database
             return mappedVeterinarian;
         }
 
-      
-       
+
+
 
         public async Task<Veterinarian> AddAsync(PostVeterinarianDTO veterinarian)
         {
@@ -142,7 +143,7 @@ namespace VeterinaryAPI.Services.Database
             return true;
         }
 
-      
+
 
         private async Task SavePositionToVeterinarian(IEnumerable<Guid> positionsId, Veterinarian veterinarian)
         {
@@ -152,7 +153,7 @@ namespace VeterinaryAPI.Services.Database
                 if (position == null)
                 {
                     this.AddModelError("PositionsId", string.Format(ExceptionMessages.POSITION_DOES_NOT_EXIST_MESSAGE, positionId));
-               
+
                     continue;
                 }
                 bool isPositionAlreadyAssigned = veterinarian.Positions
@@ -161,7 +162,7 @@ namespace VeterinaryAPI.Services.Database
                 if (isPositionAlreadyAssigned)
                 {
                     this.AddModelError("PositionsId", string.Format(ExceptionMessages.POSITION_ALREADY_ADDED_MESSAGE, positionId));
-                    
+
                     continue;
                 }
 

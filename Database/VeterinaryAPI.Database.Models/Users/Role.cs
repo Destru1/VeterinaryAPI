@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 
 namespace VeterinaryAPI.Database.Models.Users
@@ -18,7 +14,7 @@ namespace VeterinaryAPI.Database.Models.Users
         }
 
         [Required]
-        [StringLength(RolesConstants.NAME_MAX_LENGTH)]
+        [StringLength(RoleConstants.NAME_MAX_LENGTH)]
         public string Name { get; set; }
 
         public virtual ICollection<UserRoleMapping> Users { get; set; }

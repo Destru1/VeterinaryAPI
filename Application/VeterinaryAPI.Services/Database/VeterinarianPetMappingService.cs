@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
@@ -13,11 +11,11 @@ using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Services.Database
 {
-   public class VeterinarianPetMappingService : BaseService<VeterinarianPetMapping>, IVeterinarianPetMappingService
+    public class VeterinarianPetMappingService : BaseService<VeterinarianPetMapping>, IVeterinarianPetMappingService
     {
 
         public VeterinarianPetMappingService(VeterinaryAPIDbcontext dbcontext, IMapper mapper)
-            :base(dbcontext,mapper)
+            : base(dbcontext, mapper)
         {
 
         }
@@ -82,11 +80,11 @@ namespace VeterinaryAPI.Services.Database
             return modelToReturn;
         }
 
-       
-     
+
+
         private void CheckDateTime(DateTime appointmentDate)
         {
-            if (DateTime.Compare(DateTime.UtcNow , appointmentDate) > 0)
+            if (DateTime.Compare(DateTime.UtcNow, appointmentDate) > 0)
             {
                 throw new ArgumentException(ExceptionMessages.APPOINTMENT_DATE_INVALID_MESSAGE);
             }

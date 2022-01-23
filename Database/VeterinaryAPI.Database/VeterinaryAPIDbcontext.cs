@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using VeterinaryAPI.Common;
 using VeterinaryAPI.Database.Models.Users;
 using VeterinaryAPI.Database.Models.Veterinary;

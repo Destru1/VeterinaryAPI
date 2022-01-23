@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
-using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Owner;
 using VeterinaryAPI.Infastructure.Filters;
 using VeterinaryAPI.Services.Database.Interfaces;

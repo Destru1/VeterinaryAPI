@@ -1,27 +1,24 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VeterinaryAPI.Database;
 using VeterinaryAPI.Database.Models;
 
 namespace VeterinaryAPI.Services.Database
 {
-   public abstract class BaseService<TEntity> 
+    public abstract class BaseService<TEntity>
                             where TEntity : BaseModel
     {
         private readonly IActionContextAccessor actionContextAccessor;
-        protected BaseService(VeterinaryAPIDbcontext dbcontext,IMapper mapper)
+        protected BaseService(VeterinaryAPIDbcontext dbcontext, IMapper mapper)
         {
             this.Dbcontext = dbcontext;
             this.DbSet = dbcontext.Set<TEntity>();
             this.Mapper = mapper;
         }
 
-        protected BaseService(VeterinaryAPIDbcontext dbcontext, IMapper mapper,IActionContextAccessor actionContextAccessor)
-            :this(dbcontext,mapper)
+        protected BaseService(VeterinaryAPIDbcontext dbcontext, IMapper mapper, IActionContextAccessor actionContextAccessor)
+            : this(dbcontext, mapper)
         {
             this.actionContextAccessor = actionContextAccessor;
         }

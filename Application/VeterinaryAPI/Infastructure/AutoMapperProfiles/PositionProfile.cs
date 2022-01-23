@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VeterinaryAPI.Database.Models.Veterinary;
 using VeterinaryAPI.DTOs.Positions;
 
@@ -30,7 +27,7 @@ namespace VeterinaryAPI.Infastructure.AutoMapperProfiles
                 .ForMember(gpd => gpd.Name, gpd => gpd.MapFrom(mapping => mapping.Position.Name));
 
             this.CreateMap<PutPositionDTO, Position>();
-                
+
         }
     }
 }

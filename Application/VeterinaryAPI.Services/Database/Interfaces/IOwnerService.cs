@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.DTOs.Owner;
 
 namespace VeterinaryAPI.Services.Database.Interfaces
 {
-   public interface IOwnerService
+    public interface IOwnerService
     {
 
         Task<T> GetAllAsync<T>();

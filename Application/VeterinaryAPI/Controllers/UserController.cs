@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using VeterinaryAPI.Database.Models.Users;
 using VeterinaryAPI.DTOs.User;
 using VeterinaryAPI.Services.Database.Interfaces;
 

@@ -1,8 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Database.Models.Users;
@@ -16,7 +12,7 @@ namespace VeterinaryAPI.Database.Seed.Seed
         {
             IRoleService roleService = serviceProvider.ServiceProvider.GetRequiredService(typeof(IRoleService)) as IRoleService;
 
-            if (await roleService.IsThereAnyDataInTableAsync()== false)
+            if (await roleService.IsThereAnyDataInTableAsync() == false)
             {
                 await roleService.AddAsync<Role>(GlobalConstants.USER_ROLE_NAME);
                 await roleService.AddAsync<Role>(GlobalConstants.ADMIN_ROLE_NAME);

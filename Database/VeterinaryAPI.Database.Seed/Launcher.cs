@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VeterinaryAPI.Database.Seed.Seed;
@@ -20,7 +19,7 @@ namespace VeterinaryAPI.Database.Seed
                 new UserRoleMappingSeeder(),
             };
 
-            using(var serviceProvider = app.ApplicationServices.CreateScope())
+            using (var serviceProvider = app.ApplicationServices.CreateScope())
             {
                 foreach (var seeder in seeders)
                 {

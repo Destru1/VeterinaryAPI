@@ -2,10 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
@@ -16,11 +14,11 @@ using VeterinaryAPI.Services.Database.Interfaces;
 
 namespace VeterinaryAPI.Services.Database
 {
-   public class PetService : BaseService<Pet>, IPetService
+    public class PetService : BaseService<Pet>, IPetService
     {
 
         public PetService(VeterinaryAPIDbcontext dbcontext, IMapper mapper)
-            : base(dbcontext,mapper)
+            : base(dbcontext, mapper)
         {
 
         }
@@ -128,6 +126,6 @@ namespace VeterinaryAPI.Services.Database
             return true;
         }
 
-        
+
     }
 }

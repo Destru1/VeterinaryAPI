@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VeterinaryAPI.Database.Models.Veterinary
 {
-     public class OwnerPetMapping : BaseModel
+    public class OwnerPetMapping : BaseModel
     {
         public OwnerPetMapping()
-            :base()
+            : base()
         {
 
         }

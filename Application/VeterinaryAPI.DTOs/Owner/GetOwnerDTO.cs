@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VeterinaryAPI.DTOs.Pet;
 
 namespace VeterinaryAPI.DTOs.Owner
 {
-   public class GetOwnerDTO
+    public class GetOwnerDTO
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -20,6 +16,6 @@ namespace VeterinaryAPI.DTOs.Owner
 
         public DateTime? UpdatedOn { get; set; }
 
-       public GetAllPetsDTO Pets { get; set; }
+        public GetAllPetsDTO Pets { get; set; }
     }
 }

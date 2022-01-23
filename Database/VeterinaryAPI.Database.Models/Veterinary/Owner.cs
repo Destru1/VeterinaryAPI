@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants.ModelConstants;
 
 namespace VeterinaryAPI.Database.Models.Veterinary
@@ -12,7 +8,7 @@ namespace VeterinaryAPI.Database.Models.Veterinary
     {
 
         public Owner()
-            :base()
+            : base()
         {
             this.Pets = new HashSet<OwnerPetMapping>();
         }
@@ -22,7 +18,7 @@ namespace VeterinaryAPI.Database.Models.Veterinary
 
         [Required]
         [StringLength(OwnerConstants.NAMES_MAX_LENGTH)]
-        public string  LastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(OwnerConstants.PHONENUMBER_MAX_LENGHT)]

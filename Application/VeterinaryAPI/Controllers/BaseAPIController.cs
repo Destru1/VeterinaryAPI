@@ -7,6 +7,6 @@ namespace VeterinaryAPI.Controllers
     [Route("api/[controller]")]
     public abstract class BaseAPIController : ControllerBase
     {
-        
+
     }
 }

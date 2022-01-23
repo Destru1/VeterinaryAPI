@@ -1,15 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VeterinaryAPI.Database.Models.Veterinary;
 
 namespace VeterinaryAPI.Database.EntityTypeConfigurations.Veterinary
 {
-     public class PetTypeConfiguration : IEntityTypeConfiguration<OwnerPetMapping>
+    public class PetTypeConfiguration : IEntityTypeConfiguration<OwnerPetMapping>
     {
         public void Configure(EntityTypeBuilder<OwnerPetMapping> builder)
         {

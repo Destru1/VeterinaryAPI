@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VeterinaryAPI.Common.Constants;
 using VeterinaryAPI.Common.Exeptions;
@@ -17,7 +15,7 @@ namespace VeterinaryAPI.Services.Database
     {
 
         public VeterinarianPositionService(VeterinaryAPIDbcontext dbcontext, IMapper mapper)
-            :base(dbcontext,mapper)
+            : base(dbcontext, mapper)
         {
 
         }
@@ -33,7 +31,7 @@ namespace VeterinaryAPI.Services.Database
             if (veterinarianPositionRelation == null)
             {
                 throw new EntityDoesNotExistException(ExceptionMessages.VETERINARIAN_POSITION_MAPPING_DOES_NOT_EXIST_MESSAGE);
-             
+
             }
 
             var veterinarianRelationToReturn = this.Mapper.Map<T>(veterinarianPositionRelation);
